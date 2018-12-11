@@ -11,7 +11,10 @@
  */
 
 function sayHello() {
-
+  let canvas = document.getElementById('canvas1');
+  let ctx = canvas.getContext('2d');
+  ctx.font = '48px sans-serif';
+  ctx.strokeText('Hello, World!', 10, 50);
 }
 
 /*
@@ -38,7 +41,17 @@ function sayHello() {
  */
 
 function drawRectangle() {
-
+  let canvas = document.getElementById('canvas2')
+  let ctx = canvas.getContext('2d')
+  while(true){
+    var width = Number(prompt("Width:"))
+    var height = Number(prompt("Height:"))
+    var x = Number(prompt("X:"))
+    var y = Number(prompt("X:"))
+    if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0)
+    {break;}
+  }
+  ctx.strokeRect(x, y, width, height)
 }
 
 /*
@@ -67,7 +80,20 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
+  let canvas = document.getElementById('canvas3');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
+  let color;
+  while(true){
+    color = prompt("Color:")
+    if(color=="red" || color=="green" || color=="blue" || color=="black" || color=="orange" || color=="purple" || color=="yellow"){
+      break;
+    }
+  }
+  console.log(color);
+  context.fillStyle = color;
+  context.fillRect(10, 10, 100, 50);
 }
 
 /*
@@ -100,9 +126,38 @@ function drawColoredRectangle() {
  */
 
 function drawTriangle() {
+  let canvas = document.getElementById('canvas4');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-}
+  let x=10;
+  let y=10;
+  let a;
+  let b;
+  let c;
 
+  while(true){
+    a = Number(prompt('Side 1:'));
+    b = Number(prompt('Side 2'));
+    c = Number(prompt('Side 3'));
+    if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.width-y-b>=0);
+    {break;}
+    }
+      context.beginPath();
+      context.moveTo(x,y);
+      context.lineTo(x,y+a);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(x,y+a);
+      context.lineTo(x+b,y+a);
+      context.stroke();
+      
+      context.beginPath();
+      context.moveTo(x,y);
+      context.lineTo(x+b,y+a);
+      context.stroke();
+  }
 /*
  * Smile. 7 points.
  *
@@ -123,7 +178,9 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
-
+  let canvas = document.getElementById('canvas5');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 /*
@@ -145,7 +202,9 @@ function drawSmileyFace() {
  */
 
 function drawStar() {
-
+  let canvas = document.getElementById('canvas6');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 /*
@@ -164,7 +223,9 @@ function drawStar() {
  */
 
 function drawStopSign() {
-
+  let canvas = document.getElementById('canvas7');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 /*
@@ -186,7 +247,9 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
-
+  let canvas = document.getElementById('canvas8');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 /*
@@ -219,5 +282,7 @@ function drawPyramid() {
  */
 
 function drawHouse() {
-
+  let canvas = document.getElementById('canvas9');
+  let context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
