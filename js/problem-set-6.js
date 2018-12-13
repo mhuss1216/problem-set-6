@@ -140,8 +140,12 @@ function drawTriangle() {
     a = Number(prompt('Side 1:'));
     b = Number(prompt('Side 2'));
     c = Number(prompt('Side 3'));
-    if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.width-y-b>=0);
+    if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.width-y-b>=0)
     {break;}
+
+      else {
+      alert("That is not a valid right triangle.");
+    }
     }
       context.beginPath();
       context.moveTo(x,y);
@@ -152,7 +156,7 @@ function drawTriangle() {
       context.moveTo(x,y+a);
       context.lineTo(x+b,y+a);
       context.stroke();
-      
+
       context.beginPath();
       context.moveTo(x,y);
       context.lineTo(x+b,y+a);
@@ -181,6 +185,34 @@ function drawSmileyFace() {
   let canvas = document.getElementById('canvas5');
   let context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
+  let radius = prompt("What would you like the radius of the Smiley Face to be?");
+    while(true){
+      if(radius >= 1 && radius<=canvas.width && radius.isInteger)
+        {break;}
+    }
+
+let x = canvas.width;
+let y = canvas.height;
+let mouthR = (radius*.7);
+let eyeR = (radius*.1);
+
+
+    context.beginPath();
+    context.arc(x/2, y/2, radius, 0, MathPI*2);
+    context.stroke();
+
+    context.beginPath();
+    context.arc();
+    context.stroke();
+
+    context.beginPath();
+    context.arc();
+    context.stroke();
+
+    context.beginPath();
+    context.arc();
+    context.stroke();
+
 }
 
 /*
