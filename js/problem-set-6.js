@@ -12,9 +12,9 @@
 
 function sayHello() {
   let canvas = document.getElementById('canvas1');
-  let ctx = canvas.getContext('2d');
-  ctx.font = '48px sans-serif';
-  ctx.strokeText('Hello, World!', 10, 50);
+  let context = canvas.getContext('2d');
+  context.font = '48px sans-serif';
+  context.strokeText('Hello, World!', 10, 50);
 }
 
 /*
@@ -42,7 +42,7 @@ function sayHello() {
 
 function drawRectangle() {
   let canvas = document.getElementById('canvas2')
-  let ctx = canvas.getContext('2d')
+  let context = canvas.getContext('2d')
   while(true){
     var width = Number(prompt("Width:"))
     var height = Number(prompt("Height:"))
@@ -51,7 +51,7 @@ function drawRectangle() {
     if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0)
     {break;}
   }
-  ctx.strokeRect(x, y, width, height)
+  context.strokeRect(x, y, width, height)
 }
 
 /*
@@ -182,12 +182,12 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
-  let canvas = document.getElementById('canvas5');
-  let context = canvas.getContext('2d');
+  const canvas = document.getElementById('canvas5');
+  const context = canvas.getContext('2d');
+  let radius = Number(prompt("What would you like the radius of the Smiley Face to be?"));
   context.clearRect(0, 0, canvas.width, canvas.height);
-  let radius = prompt("What would you like the radius of the Smiley Face to be?");
     while(true){
-      if(radius >= 1 && radius<=canvas.width && radius.isInteger)
+      if(radius >= 1 && radius<=canvas.width && Number.isInteger(radius))
         {break;}
     }
 
@@ -198,20 +198,21 @@ let eyeR = (radius*.1);
 
 
     context.beginPath();
-    context.arc(x/2, y/2, radius, 0, MathPI*2);
+    context.arc(radius + 10, radius + 10, radius, 0, Math.PI*2);
     context.stroke();
 
     context.beginPath();
-    context.arc();
+    context.arc(radius + 10 + radius/3, radius + 10 - radius/4, eyeR, 0, Math.PI*2);
     context.stroke();
 
     context.beginPath();
-    context.arc();
+    context.arc(radius + 10 - radius/3, radius + 10 - radius/4, eyeR, 0, Math.PI*2);
     context.stroke();
 
     context.beginPath();
-    context.arc();
+    context.arc(radius + 10, radius + 10, mouthR, 0, Math.PI);
     context.stroke();
+    context.closePath();
 
 }
 
@@ -237,6 +238,34 @@ function drawStar() {
   let canvas = document.getElementById('canvas6');
   let context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
+  let outerRadius=Number(prompt("Outer Radius"));
+  let innerRadius=Number(prompt("Inner Radius"));
+if (outerRadius>=innerRadius && canvas.width>=outerRadius+125 && canvas.height>=outerRadius+125 && innerRadius>=1 && outerRadius>=1){
+  let points = 5;
+  let oX = [];
+  let oY = [];
+  let iX = [];
+  let iY = [];
+  for(let i=0;i<points;i++){
+    oX.push(Math.cos((Math.PI * 2 * i)/points - (Math.PI/2)) * outerRadius + 125);
+    oY.push(Math.sin((Math.PI * 2 * i)/points - (Math.PI/2)) * outerRadius + 125);
+    iX.push(Math.cos(((Math.PI * 2 * i)/points) - (Math.PI/2) + (Math.PI/points)) * innerRadius + 125);
+    iY.push(Math.sin(((Math.PI * 2 * i)/points) - (Math.PI/2) + (Math.PI/points)) * innerRadius + 125);
+  }
+  context.beginPath();
+  context.moveTo(oX[0], oY[0]);
+  for(let j=0;j<oX.length;j++){
+    context.lineTo(iX[j], iY[j]);
+    context.lineTo(oX[j+1], oY[j+1]);
+  }
+  context.lineTo(oX[0], oY[0]);
+  context.stroke();
+  context.closePath();
+}
+else{
+  alert('Your Radius is Invalid');
+}
+
 }
 
 /*
@@ -258,6 +287,23 @@ function drawStopSign() {
   let canvas = document.getElementById('canvas7');
   let context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "red";
+  context.beginPath();
+  context.moveTo(66, 10);
+  context.lineTo(146, 10);
+  context.lineTo(202, 66);
+  context.lineTo(202, 144);
+  context.lineTo(146, 202);
+  context.lineTo(66, 202);
+  context.lineTo(10, 146);
+  context.lineTo(10, 66);
+  context.closePath();
+  context.fill();
+  context.stroke();
+  context.lineWidth = 1;
+  context.font = "65px Arial";
+  context.fillStyle = "white";
+  context.fillText("STOP", 18, 130);
 }
 
 /*
@@ -282,6 +328,20 @@ function drawPyramid() {
   let canvas = document.getElementById('canvas8');
   let context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
+  let sideLength = Number(prompt("Length:"));
+  let x = 10;
+  let y = canvas.height - 10;
+  let i = 0;
+  lineNumber = 1;
+  while(i < 5){
+    for(let j = 0 + lineNumber;j <= 5;j++){
+      context.strokeRect(x,y-sideLength,sideLength,sideLength);
+      x+= sideLength;}
+      x = 10 + (sideLength/2) * lineNumber;
+      y-= sideLength;
+      lineNumber++;
+      i++;
+}
 }
 
 /*
@@ -317,4 +377,55 @@ function drawHouse() {
   let canvas = document.getElementById('canvas9');
   let context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
+
+  while(true){
+    doorColor=prompt("Enter a color for the Door");
+    houseColor=prompt("Enter a color for the House");
+  if((doorColor == "brown" || doorColor == "blue" || doorColor == "green" || doorColor == "orange" || doorColor == "purple" || doorColor == "red" || doorColor == "yellow")
+    && (houseColor == "brown" || houseColor == "blue" || houseColor == "green" || houseColor == "orange" || houseColor == "purple" || houseColor == "red" || houseColor == "yellow"))
+    {break;}
+  else{
+   alert("One or more of your colors is not supported.")}
+}
+  let x = 150;
+  let lengthHouse = 576;
+  let heightHouse = 400;
+  let y=canvas.height - (heightHouse - 10);
+
+    context.beginPath();
+    context.fillStyle = houseColor;
+    context.fillRect(x,y,lengthHouse,heightHouse);
+    context.lineWidth = 1;
+    context.stroke();
+
+    context.fillStyle = doorColor;
+    context.fillRect(x+(lengthHouse/2)-30,y+300,60,100);
+    context.strokeRect(x+(lengthHouse/2)-30,y+300,60,100);
+    context.stroke();
+
+    context.fillStyle="gray";
+    context.moveTo(x,y);
+    context.lineTo(x+286,150);
+    context.lineTo(x+lengthHouse,y);
+    context.lineTo(x,y);
+    context.fill();
+    context.lineWidth = 1;
+    context.stroke();
+
+    context.fillStyle="#ADD8E6";
+    context.fillRect(225, y + 75, 75, 75);
+    context.fillRect(600, y + 75, 75, 75);
+    context.fillRect(225, y + 250, 75, 75);
+    context.fillRect(600, y + 250, 75, 75);
+    context.closePath();
+    context.lineWidth = 1;
+    context.stroke();
+
+    context.beginPath();
+    context.fillStyle='yellow';
+    context.arc(450, 700, 6, 0, Math.PI*2);
+    context.fill();
+    context.closePath()
+    context.lineWidth = 1;
+    context.stroke();
 }
